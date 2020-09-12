@@ -125,10 +125,35 @@
 
       $('#image-loader').fadeIn();
 
+      function isEmail(email) {
+         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+         return regex.test(email);
+      }
+
       var contactName = $('#contactForm #contactName').val();
       var contactEmail = $('#contactForm #contactEmail').val();
       var contactSubject = $('#contactForm #contactSubject').val();
       var contactMessage = $('#contactForm #contactMessage').val();
+      if(contactName.length < 3){
+         $('#image-loader').fadeOut();
+         $('#message-warning').html('Please Enter Your Name');
+         $('#message-warning').fadeIn();
+         return false ;
+      }
+
+      if(!isEmail(contactEmail)){
+         $('#image-loader').fadeOut();
+         $('#message-warning').html('Please Enter Your Email. <br> Example : yourmail@example.com');
+         $('#message-warning').fadeIn();
+         return false ;
+      }
+
+      if(contactMessage.length < 20){
+         $('#image-loader').fadeOut();
+         $('#message-warning').html('Please Enter Your Message. <br> Atleast 20 Characters');
+         $('#message-warning').fadeIn();
+         return false ;
+      }
 
       var data = 'name=' + contactName + '&email=' + contactEmail +
                '&subject=' + contactSubject + '&message=' + contactMessage;
@@ -136,7 +161,7 @@
       $.ajax({
 
 	      type: "POST",
-	      url: "www.akashfield.ml/inc/sendEmail.php",
+	      url: "http://www.akashfield.ml/inc/sendEmail.php",
 	      data: data,
 	      success: function(msg) {
 
