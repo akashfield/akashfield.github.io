@@ -130,13 +130,13 @@
       var contactSubject = $('#contactForm #contactSubject').val();
       var contactMessage = $('#contactForm #contactMessage').val();
 
-      var data = 'contactName=' + contactName + '&contactEmail=' + contactEmail +
-               '&contactSubject=' + contactSubject + '&contactMessage=' + contactMessage;
+      var data = 'name=' + contactName + '&email=' + contactEmail +
+               '&subject=' + contactSubject + '&message=' + contactMessage;
 
       $.ajax({
 
 	      type: "POST",
-	      url: "inc/sendEmail.php",
+	      url: "www.akashfield.ml/inc/sendEmail.php",
 	      data: data,
 	      success: function(msg) {
 
